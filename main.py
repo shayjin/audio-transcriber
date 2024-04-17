@@ -74,7 +74,7 @@ def index():
 @app.route('/about')
 def about():
     delete_leftover_files()
-    return render_template('about.html', files=sessionInfo.f)
+    return render_template('about.html', variable=sessionInfo.v, files=sessionInfo.f)
 
 @app.route("/login", methods=["GET"])
 def login():
@@ -138,7 +138,6 @@ def upload_file():
         else:
             return redirect(url_for('index'))
     else:
-        print("hi")
         i1 = request.form["hi"]
         n1 = request.files["mp3_file"].filename
         access_token = session.get('google_token')
@@ -152,22 +151,24 @@ def upload_file():
 @app.route('/download_to_drive')
 def upload_to_drive():
     global sessionInfo
-    
-    contents = request.args.get('param')
-    access_token = sessionInfo.session.get('google_token')
-    t = json.loads(access_token)['token']
-    credentials = Credentials(t)
-    service = build('drive', 'v3', credentials=credentials)
-    file_metadata = {
-        'name': 'result.txt'
-    }
+    try:
+        contents = request.args.get('param')
+        access_token = sessionInfo.session.get('google_token')
+        t = json.loads(access_token)['token']
+        credentials = Credentials(t)
+        service = build('drive', 'v3', credentials=credentials)
+        file_metadata = {
+            'name': 'result.txt'
+        }
 
-    with open('./result.txt', 'w') as f:
-        f.write(contents)
+        with open('./result.txt', 'w') as f:
+            f.write(contents.replace("ㄱ", "'"))
 
-    media = MediaFileUpload('./result.txt', mimetype='text/plain')
-    service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-    return ""
+        media = MediaFileUpload('./result.txt', mimetype='text/plain')
+        service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+        return ""
+    except:
+        return Exception()
 
 if __name__ == '__main__':
     app.run(debug=True)

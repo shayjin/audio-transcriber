@@ -16,7 +16,7 @@
         <ul>
             <li><a href="{{ url_for('index') }}">Audio Transcriber</a></li>
             <li><a href="{{ url_for('about') }}">About</a></li>
-            {% if variable %}
+            {% if user %}
                 <li><a href="/logout">Log Out</a></li>
             {% endif %}
         </ul>

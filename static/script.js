@@ -58,6 +58,7 @@ function formatTime(time) {
 }
 
 function attachFileFromDrive(fileInfo) {
+    console.log(fileInfo);
     var fileInput = document.getElementById('mp3_file');
     var fileBlob = new Blob([''], { type: 'audio/mp3' });
     fileBlob.name = fileInfo.name;
@@ -70,4 +71,5 @@ function attachFileFromDrive(fileInfo) {
     fileInput.files = fileList.files;
     document.getElementById("id").setAttribute("value", fileInfo.id);
     document.getElementById('selectedFile').innerText = "Selected File: " + fileInfo.name;
+    console.log(fileInput.files);
 }

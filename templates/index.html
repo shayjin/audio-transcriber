@@ -55,4 +55,10 @@
         <p id="timerDisplay" style="display:none;"></p>
     </div>
 </body>
+<script>
+    document.getElementById('mp3_file').addEventListener('change', function(event) {
+        const selectedFile = event.target.files[0]; 
+        document.getElementById('id').value = "";
+    });
+</script>
 </html>
