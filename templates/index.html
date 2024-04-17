@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Audio Transcriber</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+</head>
+<body>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="{{ url_for('index') }}">Audio Transcriber</a></li>
+            <span>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                {% if variable %}
+                    <li><a href="/logout">Log Out</a></li>
+                {% endif %}
+            </span>
+        </ul>
+    </nav>
+    <div id="upload">
+        <p id="selectedFile">Selected File: None</p>
+        {% if variable %}
+            <h3>Choose a file from Goolgle Drive</h3>
+            {% if files %}
+                <ul class="list-group">
+                {% for file in files %}
+                    <button class="list-group-item" type="button" onclick="attachFileFromDrive({'id': '{{ file.id }}', 'name': '{{ file.name }}', 'size': '{{ file.size }}'})">{{ file.name }}</button>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No files in your Google Drive yet.</p>
+            {% endif %}
+        {% else %}
+            <form action="/login" method="GET">
+                <input type="submit" class="btn btn-outline-secondary" value="Upload from Google Drive">
+            </form>
+        {% endif %}
+        <p>OR</p>
+        <form method="POST" enctype="multipart/form-data" action="/upload" id="myForm">
+            <label for="mp3_file" class="btn btn-outline-secondary" id="label">Upload from PC</label>
+            <input type="hidden" name="hi" id="id" class="file-input" value="">
+            <input type="file" name="mp3_file" id="mp3_file" class="file-input">
+            <br/><br/>
+            <input type="submit" value="Transcribe" onclick="showLoading()" class="btn btn-primary" id="loadButton">
+        </form>
+    </div>
+    <div id="loading" style="display: none; margin-top:20px;">
+        <h3 id="transcribing">Transcribing<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span></h3>
+        <p id="timerDisplay" style="display:none;"></p>
+    </div>
+</body>
+</html>

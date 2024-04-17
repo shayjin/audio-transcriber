@@ -1,0 +1,143 @@
+
+div {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 80vh;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Style the custom label */
+.custom-label {
+    background-color: #9f9b9b;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-color: #9f9b9b;
+}
+
+.resultresult {
+    margin-top: 25px;
+}
+
+.result {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.result p {
+    text-align: left;
+    height: 500px;
+}
+
+
+
+nav {
+    background-color: #333;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li:first-child {
+    margin-right: auto; /* Move the first item to the left */
+}
+
+#last-child {
+    margin-left: auto; /* Move the last item to the right */
+}
+
+nav ul li a {
+    display: inline-block;
+    padding: 20px;
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+
+.OR {
+    margin: 0;
+}
+
+p {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+#myForm {
+   margin-bottom: -25px; 
+}
+
+#selectedFile {
+    margin-bottom: 20px !important;
+}
+
+.btn {
+    width: 300px;
+}
+
+@keyframes dot-animation {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    50% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  .dot1, .dot2, .dot3 {
+    animation: dot-animation 1.5s infinite;
+  }
+  
+  .dot1 {
+    color: red;
+  }
+  
+  .dot2 {
+    animation-delay: 0.5s;
+    color: orange;
+  }
+  
+  .dot3 {
+    animation-delay: 1s;
+    color: green;
+  }
+
+  .list-group {
+    height: 200px; 
+    overflow-y: auto;
+    border: 1px solid #ccc; 
+  }
+
+  .list-group-item {
+    height: 40px; 
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd; 
+  }
+
+  .about {
+    height: auto;
+    width: auto;
+  }
